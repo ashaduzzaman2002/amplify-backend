@@ -11,7 +11,17 @@ const schema = a.schema({
     .model({
       content: a.string(),
     })
-    .authorization((allow) => [allow.guest()]),
+    .authorization((allow) => [
+      // allow.guest()
+      allow.publicApiKey().to(['read']),
+      allow.authenticated()
+      // allow.owner('userPools')
+      // allow.guest().read(),
+      // allow.authenticated().create(),
+      // allow.authenticated().update(),
+      // allow.authenticated().delete(), 
+    ]),
+
 });
 
 export type Schema = ClientSchema<typeof schema>;
